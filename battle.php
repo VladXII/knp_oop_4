@@ -1,4 +1,6 @@
 <?php
+use Service\Container;
+
 require __DIR__.'/bootstrap.php';
 
 $container = new Container($configuration);
@@ -24,14 +26,15 @@ if (!$ship1 || !$ship2) {
     die;
 }
 
+$battleManager = $container->getBattleManager();
+
 if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
     header('Location: /index.php?error=bad_quantities');
     die;
 }
 
-$battleManager = $container->getBattleManager();
 $battleType = $_POST['battle_type'];
-$battleResult = $battleManager->battle($ship1, $ship1Quantity,$ship2, $ship2Quantity, $battleType);
+$battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
 ?>
 
 <html>
@@ -63,16 +66,16 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity,$ship2, $ship2Quan
                 <h2 class="text-center">The Matchup:</h2>
                 <p class="text-center">
                     <br>
-                    <?php echo $ship1Quantity; ?> <?php echo $ship1->getName(); ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
+                    <?php echo $ship1Quantity; ?> <?php echo $ship1; ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
                     VS.
-                    <?php echo $ship2Quantity; ?> <?php echo $ship2->getName(); ?><?php echo $ship2Quantity > 1 ? 's': ''; ?>
+                    <?php echo $ship2Quantity; ?> <?php echo $ship2; ?><?php echo $ship2Quantity > 1 ? 's': ''; ?>
                 </p>
             </div>
             <div class="result-box center-block">
                 <h3 class="text-center audiowide">
                     Winner:
                     <?php if ($battleResult->isThereAWinner()): ?>
-                        <?php echo $battleResult->getWinningShip()->getName(); ?>
+                        <?php echo $battleResult['winningShip']->getName(); ?>
                     <?php else: ?>
                         Nobody
                     <?php endif; ?>

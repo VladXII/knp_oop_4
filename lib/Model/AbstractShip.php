@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 abstract class AbstractShip
 {
     private $id;
@@ -46,7 +48,7 @@ abstract class AbstractShip
             throw new \Exception('Strength must be a number, duh!');
         }
 
-       $this->strength = $number;
+        $this->strength = $number;
     }
 
     public function getStrength()
@@ -118,5 +120,10 @@ abstract class AbstractShip
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
