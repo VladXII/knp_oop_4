@@ -36,6 +36,10 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
+    /**
+     * @param array $shipData
+     * @return RebelShip|Ship
+     */
     private function createShipFromData(array $shipData)
     {
         if ($shipData['team'] == 'rebel') {

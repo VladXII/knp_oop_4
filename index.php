@@ -9,8 +9,7 @@ $ships = $shipLoader->getShips();
 $brokenShip = new BrokenShip('Just a hunk of metal');
 $ships[] = $brokenShip;
 
-$battleManager = $container->getBattleManager();
-$battleTypes = $battleManager->getAllBattleTypesWithDescription();
+$battleTypes = BattleManager::getAllBattleTypesWithDescription();
 
 $errorMessage = '';
 if (isset($_GET['error'])) {
@@ -128,8 +127,8 @@ if (isset($_GET['error'])) {
                     <label for="battle_type">Battle Type</label>
                     <select name="battle_type" id="battle_type" class="form-control drp-dwn-width center-block">
                         <?php foreach ($battleTypes as $battleType => $typeText): ?>
-                            <option value="<?php echo $battleType ?>"><?php echo $typeText; ?></option>
-                        <?php endforeach; ?>
+                            <option value="<?php echo $battleType; ?>"><?php echo $typeText; ?></option>
+                        <?php endforeach;; ?>
                     </select>
                 </div>
 

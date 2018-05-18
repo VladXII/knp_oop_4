@@ -46,7 +46,7 @@ abstract class AbstractShip
             throw new \Exception('Strength must be a number, duh!');
         }
 
-        $this->strength = $number;
+       $this->strength = $number;
     }
 
     public function getStrength()
